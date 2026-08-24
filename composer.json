@@ -1,0 +1,15 @@
+{
+    "name": "usuario/projeto_financeiro_rafa",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lucas Medina Bosso",
+            "email": "lmbosso2008@gmail.com"
+        }
+    ],
+    "require": {}
+}
