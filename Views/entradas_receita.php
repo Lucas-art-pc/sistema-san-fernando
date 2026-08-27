@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entradas | Barbearia Vinicius</title>
+  <title>Entradas | Fabrica San Fernando</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style-login.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -68,13 +65,14 @@
           </label>
         </div>
         <div class="table-wrap">
-          <table class="table" id="tableEntradas">
+          <table class="table" id="tabela">
             <thead>
               <tr>
                 <th>Data</th>
                 <th>Descrição</th>
                 <th>Categoria</th>
                 <th class="col-valor">Valor</th>
+                <th>Tipo</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -86,13 +84,40 @@
                   <td><?= htmlspecialchars($entrada->getCategoria()) ?></td>
                   <td>R$ <?= number_format($entrada->getValor(), 2, ',', '.') ?></td>
                   <td><?= $entrada->getTipo() ? 'Entrada' : 'Despesa' ?></td>
+                  <td class="col-acoes">
+                    <button type="button" class="btn-icon btn-editar" data-id="<?= $entrada->getId() ?>" title="Editar">
+                      ✏️
+                    </button>
+                    <button type="button" class="btn-icon btn-excluir" data-id="<?= $entrada->getId() ?>" title="Excluir">
+                      🗑️
+                    </button>
+                  </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
         </div>
         <div class="table-footer">
-          <div id="paginationEntradas" class="pagination"></div>
+          <div id="paginationSaidas" class="pagination">
+            <a href="?pagina=1" class="btn-pagina <?= $pagina <= 1 ? 'disabled' : '' ?>">«</a>
+            <a href="?pagina=<?= max(1, $pagina - 1) ?>" class="btn-pagina <?= $pagina <= 1 ? 'disabled' : '' ?>">‹</a>
+
+            <?php
+            $inicio = max(1, $pagina - 2);
+            $fim = min($totalPaginas, $pagina + 2);
+
+            if ($inicio > 1) echo '<span class="btn-pagina disabled">...</span>';
+
+            for ($i = $inicio; $i <= $fim; $i++):
+            ?>
+              <a href="?pagina=<?= $i ?>" class="btn-pagina <?= $i === $pagina ? 'active' : '' ?>"><?= $i ?></a>
+            <?php endfor; ?>
+
+            <?php if ($fim < $totalPaginas) echo '<span class="btn-pagina disabled">...</span>'; ?>
+
+            <a href="?pagina=<?= min($totalPaginas, $pagina + 1) ?>" class="btn-pagina <?= $pagina >= $totalPaginas ? 'disabled' : '' ?>">›</a>
+            <a href="?pagina=<?= $totalPaginas ?>" class="btn-pagina <?= $pagina >= $totalPaginas ? 'disabled' : '' ?>">»</a>
+          </div>
         </div>
       </div>
     </section>
@@ -101,7 +126,7 @@
 
   <div class="toast-wrap" id="toastWrap"></div>
 
-  <div class="modal" id="modalConfirm">
+<div class="modal" id="modalConfirm">
     <div class="modal-card">
       <h3 id="modalTitle">Confirmar</h3>
       <p id="modalMsg">Tem certeza?</p>
@@ -112,6 +137,7 @@
     </div>
   </div>
 
+  <script src="./js/listagem-receitas.js"></script>
 </body>
 
 </html>

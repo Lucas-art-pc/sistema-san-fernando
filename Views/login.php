@@ -4,16 +4,30 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Dashboard Financeiro Barbearia Vinicius</title>
+    <title>Login | Fabrica San Fernando</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/style-login.css" />
+    
 </head>
 
 <body>
     <div class="login-page">
+        <div class="login-left">
+            <div class="brand">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#C1121F" />
+                        <text x="16" y="21" text-anchor="middle" font-family="Poppins, sans-serif" font-size="16" font-weight="700" fill="#FFF">SF</text>
+                    </svg>
+                    <span>Finanças<br><strong>San Fernando</strong></span>
+                </div>
+                <h1>Gestão financeira com foco na sua fábrica</h1>
+                <p>Controle fluxo de caixa, metas e desempenho com mais clareza e rapidez.</p>
+            </div>
+
+        </div>
 
 
         <div class="login-right">

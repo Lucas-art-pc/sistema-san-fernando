@@ -1407,3 +1407,68 @@ a {
     print-color-adjust: exact;
   }
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1rem 1.2rem;
+  flex-wrap: wrap;
+}
+
+.btn-pagina {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  background: #fff;
+  color: #4a4f5c;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-pagina:hover:not(.disabled):not(.active) {
+  background: #f4f6fa;
+  border-color: #cfd6e4;
+  color: #1f2937;
+}
+
+.btn-pagina.active {
+  background: #2d3ee0; /* ajuste pra cor primária do seu projeto */
+  border-color: #2d3ee0;
+  color: #fff;
+  font-weight: 600;
+  cursor: default;
+}
+
+.btn-pagina.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* setas Anterior/Próxima com um pouco mais de destaque */
+.btn-pagina:first-child,
+.btn-pagina:last-child {
+  font-weight: 600;
+  padding: 0 14px;
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    justify-content: center;
+  }
+  .btn-pagina {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}

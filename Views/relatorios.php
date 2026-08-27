@@ -3,18 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Relatórios | Barbearia Vinicius</title>
+<title>Relatórios | Fabrica San Fernando</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style-login.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
-  if(window.jspdf){
-    window.jsPDF = window.jspdf.jsPDF || window.jspdf.default || window.jsPDF || window.jspdf;
-  }
-</script>
 </head>
 <body>
   <div class="app">
@@ -26,23 +21,14 @@
         </div>
 
         <div class="filter-panel elegant">
-          <div class="period-tabs" role="tablist">
-            <button class="period-tab active" data-rperiod="dia">Diário</button>
-            <button class="period-tab" data-rperiod="mes">Mensal</button>
-            <button class="period-tab" data-rperiod="ano">Anual</button>
-          </div>
           <div class="period-inputs">
             <div class="field" id="wrapDia">
-              <label>Data</label>
+              <label>Data início:</label>
               <input type="date" id="filtroDia" />
             </div>
-            <div class="field hidden" id="wrapMes">
-              <label>Mês</label>
-              <input type="month" id="filtroMes" />
-            </div>
-            <div class="field hidden" id="wrapAno">
-              <label>Ano</label>
-              <input type="number" id="filtroAno" min="2000" max="2100" placeholder="2026" />
+            <div class="field" id="wrapDia">
+              <label>Data fim:</label>
+              <input type="date" id="filtroDia" />
             </div>
             <div class="field">
               <label>Filtrar por tipo</label>
