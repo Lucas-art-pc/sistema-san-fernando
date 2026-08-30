@@ -8,7 +8,7 @@ class Receitas
   private string $descricao_receita;
   private string $categoria_receita;
   private float $valor_receita;
-  private string $tipo_receita;
+  private ?string $tipo_receita;
   private string $data_receita;
 
   public function __construct($id_receita, $descricao_receita, $categoria_receita, $valor_receita, $data_receita,  $tipo_receita)

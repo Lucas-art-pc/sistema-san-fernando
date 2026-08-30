@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style-login.css" />
+  <link rel="stylesheet" href="/css/style-modal.css" />
 </head>
 
 <body>
@@ -126,8 +128,8 @@
 
   <div class="toast-wrap" id="toastWrap"></div>
 
-<div class="modal" id="modalConfirm">
-    <div class="modal-card">
+  <div class="modal" id="modalConfirm">
+    <div class="modal-card modal-card--form">
       <h3 id="modalTitle">Confirmar</h3>
       <p id="modalMsg">Tem certeza?</p>
       <div class="modal-actions">
@@ -137,7 +139,55 @@
     </div>
   </div>
 
+
+  <!-- Modal de Edição de Saída -->
+  <div class="modal" id="modalEditar">
+    <div class="modal-card modal-card--form">
+      <h3>Editar Entrada</h3>
+
+      <form class="form" id="formEditarReceita" method="POST">
+        <input type="hidden" name="id_receita" id="editId" />
+        <input type="hidden" name="tipo_receita" id="editTipo" />
+
+        <div class="field grow">
+          <label>Descrição</label>
+          <input type="text" name="descricao_receita" id="editDescricao" required placeholder="Ex: Compra de produtos" />
+        </div>
+
+        <div class="field">
+          <label>Categoria</label>
+          
+            <select name="categoria_receita" id="editCategoria"required>
+            <option value="">Selecione</option>
+            <option value="servicos">Serviços</option>
+            <option value="produtos">Produtos</option>
+            <option value="assinaturas">Assinaturas</option>
+            <option value="outros">Outros</option>
+          </select>
+      
+        </div>
+
+        <div class="field">
+          <label>Valor (R$)</label>
+          <input type="number" step="0.010" name="valor_receita" id="editValor" required placeholder="0.00" />
+        </div>
+
+        <div class="field">
+          <label>Data</label>
+          <input type="date" name="data_receita" id="editData" required />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="editCancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary" name="atualiza" value="atualiza" id="editSalvar">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script src="./js/listagem-receitas.js"></script>
+
+
 </body>
 
 </html>

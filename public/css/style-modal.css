@@ -1,0 +1,131 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.55);
+  backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  animation: fadeIn 0.2s ease;
+  padding: 1rem;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: popIn 0.25s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Variante maior para modais com formulário (ex: edição) */
+.modal-card--form {
+  max-width: 480px;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--gray-900, #111);
+}
+
+.modal-card p {
+  color: var(--gray-500);
+  font-size: 13.5px;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Formulário dentro do modal — sobrescreve o layout em linha do .form global da página */
+.modal-card .form,
+.modal-card form.form {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+  width: 100%;
+}
+
+.modal-card .field,
+.modal-card .field.grow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  flex: 1 1 100% !important;
+  max-width: 100%;
+}
+
+.modal-card .field label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+.modal-card .field input,
+.modal-card .field select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #e6e9ef;
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--gray-900, #111);
+  background: #fafbfc;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modal-card .field input:focus,
+.modal-card .field select:focus {
+  outline: none;
+  border-color: var(--primary, #4f46e5);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  background: #fff;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eef0f4;
+}
+
+/* Botões ocupam a largura toda em telas pequenas */
+@media (max-width: 480px) {
+  .modal-card {
+    padding: 1.3rem;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+}

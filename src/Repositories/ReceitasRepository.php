@@ -261,49 +261,59 @@ class ReceitasRepository
         return (int) $stmt->fetchColumn();
     }
 
-    public function exibirRelatorio($data_inicio, $data_fim, $tipo_receita)
-{
-    $sqlEntradaESaida = "SELECT * FROM tb_receitas
+    public function exibirRelatorio(string $data_inicio, string $data_fim, ?string $tipo_receita): array
+    {
+        $sqlBase = "SELECT * FROM tb_receitas
             WHERE data_receita >= :data_inicio
             AND data_receita <= :data_fim";
 
-    $sqlEntradaOuSaida = "SELECT * FROM tb_receitas
-            WHERE data_receita >= :data_inicio
-            AND data_receita <= :data_fim
-            AND tipo_receita = :tipo_receita";
+        if (empty($tipo_receita)) {
+            $stmt = $this->pdo->prepare($sqlBase);
+            $stmt->bindValue(':data_inicio', $data_inicio);
+            $stmt->bindValue(':data_fim', $data_fim);
+        } else {
+            $stmt = $this->pdo->prepare($sqlBase . " AND tipo_receita = :tipo_receita");
+            $stmt->bindValue(':data_inicio', $data_inicio);
+            $stmt->bindValue(':data_fim', $data_fim);
+            $stmt->bindValue(':tipo_receita', $tipo_receita);
+        }
 
-    if (!isset($tipo_receita)) {
-        $stmt = $this->pdo->prepare($sqlEntradaESaida);
-        $stmt->bindValue(':data_inicio', $data_inicio);
-        $stmt->bindValue(':data_fim', $data_fim);
-    } else {
-        $stmt = $this->pdo->prepare($sqlEntradaOuSaida);
-        $stmt->bindValue(':data_inicio', $data_inicio);
-        $stmt->bindValue(':data_fim', $data_fim);
-        $stmt->bindValue(':tipo_receita', $tipo_receita);
+        $stmt->execute();
+        $linhas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(fn($linha) => new Receitas(
+            $linha['id_receita'],
+            $linha['descricao_receita'],
+            $linha['categoria_receita'],
+            $linha['valor_receita'],
+            $linha['data_receita'],
+            $linha['tipo_receita'],
+        ), $linhas);
     }
 
-    $stmt->execute();
-    $linhas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return array_map(fn($linha) => new Receitas(
-        $linha['id_receita'],
-        $linha['descricao_receita'],
-        $linha['categoria_receita'],
-        $linha['valor_receita'],
-        $linha['data_receita'],
-        $linha['tipo_receita'],
-    ), $linhas);
-}
+    public function deletaReceita($id): bool
+    {
+        $sql = "DELETE FROM tb_receitas WHERE id_receita = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
 
+        return $stmt->rowCount() > 0;
+    }
 
-  public function deletaReceita($id): bool
-{
-    $sql = "DELETE FROM tb_receitas WHERE id_receita = :id";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
+    public function atualizaReceita(Receitas $receitas)
+    {
+        $sql = "UPDATE tb_receitas
+            SET descricao_receita = :descricao_receita, categoria_receita = :categoria_receita, valor_receita = :valor_receita, data_receita = :data_receita
+            WHERE id_receita = :id_receita ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':descricao_receita', $receitas->getDescricao());
+        $stmt->bindValue(':categoria_receita', $receitas->getCategoria());
+        $stmt->bindValue(':valor_receita', $receitas->getValor());
+        $stmt->bindValue(':data_receita', $receitas->getData());
+        $stmt->bindValue(':id_receita', $receitas->getId());
 
-    return $stmt->rowCount() > 0;
-}
+        $stmt->execute();
+    }
 }

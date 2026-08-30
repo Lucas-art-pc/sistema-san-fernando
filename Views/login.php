@@ -90,8 +90,6 @@
     </div>
 
     <div class="toast-container" id="toastContainer"></div>
-
-    <script src="../js/script.js"></script>
 </body>
 
 </html>

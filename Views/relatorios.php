@@ -19,23 +19,22 @@
           <h2>Relatórios & Extratos</h2>
           <p>Gere relatórios financeiros detalhados e extratos por período</p>
         </div>
-
         <div class="filter-panel elegant">
           <div class="period-inputs">
             <div class="field" id="wrapDia">
               <label>Data início:</label>
-              <input type="date" id="filtroDia" />
+              <input type="date" id="filtroDataInicio" />
             </div>
             <div class="field" id="wrapDia">
               <label>Data fim:</label>
-              <input type="date" id="filtroDia" />
+              <input type="date" id="filtroDataFim" />
             </div>
             <div class="field">
               <label>Filtrar por tipo</label>
               <select id="filtroTipo">
-                <option value="ambos">Entradas e Saídas</option>
-                <option value="in">Apenas Entradas</option>
-                <option value="out">Apenas Saídas</option>
+                <option>Entradas e Saídas</option>
+                <option value="entrada">Apenas Entradas</option>
+                <option value="despesa">Apenas Saídas</option>
               </select>
             </div>
           </div>
@@ -50,8 +49,7 @@
         <div id="reportOutput" class="report-output"></div>
 
         <div class="form-actions hidden" id="reportActions">
-          <button class="btn btn-ghost" id="btnPrint">🖨️ Imprimir</button>
-          <button class="btn btn-primary" id="btnPdf">📄 Exportar PDF</button>
+          <button class="btn btn-primary" id="btnPdf">Exportar PDF</button>
         </div>
       </section>
     </main>
@@ -69,5 +67,6 @@
       </div>
     </div>
   </div>
+<script src="./js/gerar-relatorio.js"></script>
 </body>
 </html>
